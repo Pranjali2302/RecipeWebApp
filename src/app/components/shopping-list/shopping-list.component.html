@@ -1,0 +1,20 @@
+<div class="container">
+  <form #recipeForm="ngForm" ngSubmit="submit(recipeForm)">
+    <div class="form-group col-lg-6">
+       <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" ngModel #name="ngModel">
+    </div>
+    <div class="form-group col-lg-6">
+       <label for="name">Amount</label>
+      <input type="text" class="form-control" name="amount" ngModel #amount="ngModel">
+    </div>
+    <button class="btn btn-success">Add</button>
+    <button class="btn btn-danger">Delete</button>
+    <button class="btn btn-primary">Clear</button>
+    <br><br><hr>
+    <ul class="list-group" *ngFor="let d of cartData.ingredients">
+      <li class="list-group-item">{{d.name}}( {{d.quantity}} )</li>
+    </ul>
+    <pre>{{recipeForm.value |json}}</pre>
+  </form>
+</div>

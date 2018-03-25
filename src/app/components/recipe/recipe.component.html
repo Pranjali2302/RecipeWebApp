@@ -1,0 +1,15 @@
+<div>
+  <button class="btn btn-success" [routerLink]="['new']" routerLinkActive="active">New Recipe</button>
+  <ul class="list-group" *ngFor="let  r of recipes">
+    <li routerLinkActive="active" class="list-group-item">
+      <div [routerLink]="r.id" style="display:inline-block;" >
+        <p><b>{{r.name | uppercase}}</b></p>
+        <p>{{r.description}}</p>
+        <div class="pull-right">
+          <img [src]="r.imagePath" >
+        </div>
+        
+      </div>
+    </li>
+  </ul>
+</div>

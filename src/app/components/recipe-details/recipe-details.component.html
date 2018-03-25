@@ -1,0 +1,18 @@
+<div class="">
+  <img [src]="recipeDetails.imagePath">
+  <h3>{{recipeDetails.name|uppercase}}</h3>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage Recipe
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a (click)="toShoppingList()">To Shopping List</a></li>
+      <li><a [routerLink]="['edit']" routerLinkActive="active">Edit Recipe</a></li>
+      <li><a (click)="deleteRecipe()">Delete Recipe</a></li>
+    </ul>
+  </div>
+  <p>{{recipeDetails.description}}</p>
+  <ul class="list-group" *ngFor="let i of recipeDetails.ingredients">
+    <li class="list-group-item">{{i.name}} ( {{i.quantity}} )</li>
+  </ul>
+</div>
+<router-outlet></router-outlet>
