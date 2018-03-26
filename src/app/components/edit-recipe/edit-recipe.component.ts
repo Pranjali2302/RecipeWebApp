@@ -1,4 +1,8 @@
+import { Recipe } from './../../interfaces/recipe';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { RecipeServiceService } from '../../services/recipe-service/recipe-service.service';
+import { FormGroup ,FormArray , FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -6,10 +10,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-recipe.component.css']
 })
 export class EditRecipeComponent implements OnInit {
-
-  constructor() { }
+  recipes : Recipe[] = [];
+  recipeDetails : Recipe ;
+  editRecipeForm:FormGroup;
+  constructor(private RecipeService : RecipeServiceService,
+              private routeParam : ActivatedRoute) { }
 
   ngOnInit() {
+    this.recipes = JSON.parse(localStorage.getItem('recipes'));
+    this.routeParam.params.subscribe((param)=>{
+      this.recipeDetails = this.RecipeService.getRecipeById(+param.id,this.recipes)
+      console.log(this.recipeDetails)
+    })
+
+    this.editRecipeForm = new FormGroup({
+      name : new FormControl(this.recipeDetails.name),
+      imagePath: new FormControl(this.recipeDetails.imagePath),
+      description: new FormControl(this.recipeDetails.description),
+      ingredients: new FormGroup({
+        name:new FormControl(''),
+        quantity : new FormControl('')
+      })
+    })
+
+    
   }
 
 }
