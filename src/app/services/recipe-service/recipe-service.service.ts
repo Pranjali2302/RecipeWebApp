@@ -19,6 +19,12 @@ export class RecipeServiceService {
       return recipe.id === id
     })[0];
   }
+  
+  addNewRecipe(data){
+    this.recipeList = JSON.parse(localStorage.getItem('recipes'));
+    return this.recipeList.push(data);
+  }
+
   getDatafrmShoppingList(){
     return this.cartData;
   }

@@ -14,6 +14,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
+import { IngredientsComponent } from './components/ingredients/ingredients.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.compon
     RecipeComponent,
     RecipeDetailsComponent,
     NewRecipeComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    IngredientsComponent
   ],
   imports: [
   BrowserModule,

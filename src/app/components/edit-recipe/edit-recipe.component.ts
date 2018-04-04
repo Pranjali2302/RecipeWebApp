@@ -20,20 +20,47 @@ export class EditRecipeComponent implements OnInit {
     this.recipes = JSON.parse(localStorage.getItem('recipes'));
     this.routeParam.params.subscribe((param)=>{
       this.recipeDetails = this.RecipeService.getRecipeById(+param.id,this.recipes)
-      console.log(this.recipeDetails)
+      console.log("edit recipe data",this.recipeDetails)
     })
 
     this.editRecipeForm = new FormGroup({
       name : new FormControl(this.recipeDetails.name),
       imagePath: new FormControl(this.recipeDetails.imagePath),
       description: new FormControl(this.recipeDetails.description),
-      ingredients: new FormGroup({
-        name:new FormControl(''),
-        quantity : new FormControl('')
-      })
-    })
-
-    
+      ingredients: new FormArray([
+      ])
+    });
+    this.setIngredients()
   }
 
+  setIngredients(){
+    let control = <FormArray>this.editRecipeForm.controls.ingredients;
+    this.recipeDetails.ingredients.forEach(x => {
+      control.push(new FormGroup({
+        name : new FormControl(x.name),
+        quantity : new FormControl(x.quantity)
+        }))
+    })
+  }
+
+  initIngredients(){
+      return new FormGroup({
+        name : new FormControl(''),
+        quantity : new FormControl('')
+      })
+  }
+  
+  addIngredients(){
+    const control =<FormArray>(this.editRecipeForm.controls['ingredients']);
+    control.push(this.initIngredients());
+  }
+  
+  removeIngredients(i){
+    const control =<FormArray>(this.editRecipeForm.controls['ingredients']);
+    control.removeAt(i);
+  }
+
+  saveRecipe(){
+      console.log(' this.newRecipeForm',  this.editRecipeForm.value);
+  }
 }

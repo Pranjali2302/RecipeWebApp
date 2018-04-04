@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{ FormGroup, FormArray, FormControl } from '@angular/forms';
+import{ FormGroup, FormArray, FormControl,FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-new-recipe',
@@ -8,24 +8,39 @@ import{ FormGroup, FormArray, FormControl } from '@angular/forms';
 })
 export class NewRecipeComponent implements OnInit {
 newRecipeForm:FormGroup;
-  constructor() { }
+ constructor() { }
   
   ngOnInit() {
+        this.newRecipeForm = new FormGroup({
+            name:new FormControl(),
+            imagePath: new FormControl(),
+            description: new FormControl(),
+            ingredients: new FormArray([])
+        });
+    }
 
-    this.newRecipeForm = new FormGroup({
-      name : new FormControl(),
-      imagePath: new FormControl(),
-      description: new FormControl(),
-      ingredients: new FormArray([])
-    })
-  }
-submit(){
-  console.log(' this.newRecipeForm',  this.newRecipeForm);
-}
-addIngredients(){
-  (<FormArray>this.newRecipeForm.get('ingredients')).push(new FormControl(''));
-}
-delete(ingredient){
-  console.log("ingredient",ingredient)
-}
+    initIngredients() {
+        return new FormGroup({
+            name:new FormControl(''),
+            quantity:new FormControl('')
+        });
+    }
+
+    addIngredients() {
+        const control = <FormArray>this.newRecipeForm.controls['ingredients'];
+        control.push(this.initIngredients());
+    }
+
+    removeIngredients(i: number) {
+        const control = <FormArray>this.newRecipeForm.controls['ingredients'];
+        control.removeAt(i);
+    }
+    submit(){
+        
+      console.log(' this.newRecipeForm',  this.newRecipeForm.value);
+    }
+
+    delete(ingredient){
+      console.log("ingredient",ingredient)
+    }
 }
