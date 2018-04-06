@@ -17,7 +17,6 @@ export class RecipeComponent implements OnInit {
         this.recipes = recipes;
         localStorage.setItem('recipes',JSON.stringify(this.recipes));
       });
-      
   }
 
 }

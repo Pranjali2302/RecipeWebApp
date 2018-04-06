@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{ FormGroup, FormArray, FormControl,FormBuilder } from '@angular/forms';
+import{ FormGroup, FormArray, FormControl,FormBuilder ,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-recipe',
@@ -12,17 +12,17 @@ newRecipeForm:FormGroup;
   
   ngOnInit() {
         this.newRecipeForm = new FormGroup({
-            name:new FormControl(),
-            imagePath: new FormControl(),
-            description: new FormControl(),
+            name:new FormControl('',[Validators.required,Validators.minLength(4)]),
+            imagePath: new FormControl('',[Validators.required]),
+            description: new FormControl('',[Validators.required]),
             ingredients: new FormArray([])
         });
     }
 
     initIngredients() {
         return new FormGroup({
-            name:new FormControl(''),
-            quantity:new FormControl('')
+            name:new FormControl('',[Validators.required]),
+            quantity:new FormControl('',[Validators.required])
         });
     }
 
@@ -38,6 +38,9 @@ newRecipeForm:FormGroup;
     submit(){
         
       console.log(' this.newRecipeForm',  this.newRecipeForm.value);
+    }
+    cancle(){
+        this.newRecipeForm.reset();
     }
 
     delete(ingredient){

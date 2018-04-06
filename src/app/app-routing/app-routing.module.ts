@@ -1,3 +1,4 @@
+import { PendingChangesGuardGuard } from './../guards/pending-changes-guard/pending-changes-guard.guard';
 
 import { NewRecipeComponent } from './../components/new-recipe/new-recipe.component';
 import { RecipeDetailsComponent } from './../components/recipe-details/recipe-details.component';
@@ -18,7 +19,7 @@ const appRoutes : Routes = [
       {path : '', component : PlaceholderComponent},
       {path : 'new', component : NewRecipeComponent},
       {path : ':id', component : RecipeDetailsComponent},
-      {path : ':id/edit', component : EditRecipeComponent}
+      {path : ':id/edit', component : EditRecipeComponent,canDeactivate:[PendingChangesGuardGuard]}
       ]
   },
   { path : 'shoppingList', component : ShoppingListComponent},
@@ -34,6 +35,7 @@ const appRoutes : Routes = [
   exports: [
   RouterModule
   ],
-  declarations: []
+  declarations: [],
+  providers:[PendingChangesGuardGuard]
 })
 export class AppRoutingModule { }

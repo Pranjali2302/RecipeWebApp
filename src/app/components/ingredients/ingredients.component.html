@@ -1,8 +1,14 @@
 <div [formGroup]="ingredientData" class="row">
       <div class="col-lg-9">
         <input type="text" class="form-control " formControlName="name"  placeholder="Name">
+        <div class="alert alert-danger" *ngIf="ingredientData.get('name').hasError('required') && ingredientData.get('name').touched">
+          Ingredients Name is required
+        </div>
       </div>
       <div class="col-lg-3">
         <input type="text" class="form-control" formControlName="quantity"  placeholder="Quantity">
+         <div class="alert alert-danger" *ngIf="ingredientData.get('quantity').hasError('required') && ingredientData.get('quantity').touched">
+          Ingredients Quantity is required
+        </div>
       </div>
 </div>
